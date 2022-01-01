@@ -17,8 +17,8 @@
         <TextBox x:Name="CountryTextBox" HorizontalAlignment="Left" Height="45" Margin="100,350,0,0" TextWrapping="Wrap" Text="Country" VerticalAlignment="Top" Width="222"/>
         <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="45" Margin="100,400,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="222"/>
 
-        <Button x:Name="SignInButton" Content="Sign In" Margin="164,460,0,0" Height="49" Width="95" VerticalAlignment="Top"/>
-        <Button x:Name="BackButton" Content="Back" Margin="51,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.194,0.359" Click="BackButton_Click"/>
+        <Button x:Name="SignUpButton" Content="Sign Up" Margin="164,460,0,0" Height="49" Width="95" VerticalAlignment="Top"/>
+        <Button x:Name="BackButton" Content="Back" Margin="23,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.194,0.359" Click="BackButton_Click"/>
 
     </Grid>
 </Page>

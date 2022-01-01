@@ -13,7 +13,7 @@
         <TextBox HorizontalAlignment="Left" Height="45" Margin="255,286,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="222"/>
         <TextBlock x:Name="UserNameLabel" HorizontalAlignment="Left" Margin="100,230,6,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Height="43" Width="91" FontSize="18"/>
         <TextBlock x:Name="PasswordLabel" HorizontalAlignment="Left" Margin="100,286,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Height="43" Width="91" FontSize="18"/>
-        <Button x:Name="SignInButton" Content="Sign In" Margin="168,0,0,0" Height="49" Width="95"/>
+        <Button x:Name="SignInButton" Content="Sign In" Margin="168,0,0,0" Height="49" Width="95" Click="SignInButton_Click"/>
         <Button x:Name="SignUpButton" Content="SignUp" Margin="319,0,0,0" Height="49" Width="95" Click="SignUpButton_Click"/>
 
     </Grid>

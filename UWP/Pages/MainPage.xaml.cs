@@ -20,22 +20,19 @@ namespace UWP
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Login : Page
+    public sealed partial class MainPage : Page
     {
-        public Login()
+        public MainPage()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
-        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SignUp));
+            // Alter the pane close open state
+            MainView.IsPaneOpen = !MainView.IsPaneOpen;
         }
 
-        private void SignInButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
-        }
     }
 }
