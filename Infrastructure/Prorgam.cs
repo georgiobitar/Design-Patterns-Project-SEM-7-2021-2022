@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-namespace UWP.Services
+namespace Infrastructure
 {
-    public static class LoginService
+    public class Prorgam
     {
-        
+        public static void Main() { }
     }
 }

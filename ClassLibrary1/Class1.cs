@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-namespace UWP.Services
+namespace ClassLibrary1
 {
-    public static class LoginService
+    public class Class1
     {
-        
     }
 }
