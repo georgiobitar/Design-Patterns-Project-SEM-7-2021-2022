@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{D8093EF6-10F8-4AC0-BD87-C50A423B972A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WPF\WPF.csproj", "{E697BCF9-3E52-447F-A3C1-80D227FD4577}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF", "WPF\WPF.csproj", "{E697BCF9-3E52-447F-A3C1-80D227FD4577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

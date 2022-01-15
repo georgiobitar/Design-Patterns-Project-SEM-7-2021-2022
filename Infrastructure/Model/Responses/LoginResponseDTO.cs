@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF.Services
+namespace Infrastructure.Model.DataContracts.Responses
 {
-    public class LoginService
+    public class LoginResponseDTO : Response
     {
-
+        public bool Success;
     }
 }

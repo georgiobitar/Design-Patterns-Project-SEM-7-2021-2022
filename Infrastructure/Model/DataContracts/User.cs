@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF.Model.DataContracts
+namespace Infrastructure.Model.DataContracts
 {
     public partial class User
     {

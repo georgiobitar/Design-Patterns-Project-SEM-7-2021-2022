@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF.Model.Requests
+namespace Infrastructure.Model.DataContracts.Requests
 {
     public class LoginRequestDTO : Request
     {

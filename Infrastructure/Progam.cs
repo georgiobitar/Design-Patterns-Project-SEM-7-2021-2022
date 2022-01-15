@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF.Model.Responses
+namespace Infrastructure
 {
-    internal class LoginResponseDTO
+    public class Progam
     {
+        public static void Main() {
+
+        }
     }
 }

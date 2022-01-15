@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure
+namespace Infrastructure.Model.DataContracts.Requests
 {
-    public class Prorgam
+    public class Request
     {
-        public static void Main() { }
     }
 }

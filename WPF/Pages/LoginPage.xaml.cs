@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Infrastructure;
+using Infrastructure.Model.DataContracts.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,11 +19,9 @@ using System.Windows.Shapes;
 
 namespace WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class LoginPage : Window
     {
+        
         public LoginPage()
         {
             InitializeComponent();
@@ -27,6 +29,9 @@ namespace WPF
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
+            //HttpClient httpClient = new HttpClient();
+            //LoginResponseDTO response = httpClient.GetFromJsonAsync<LoginResponseDTO>(requestUri: "");// new User() { UserName = UserNameTextBox.Text, Password = PasswordTextBox.Text });
+            
             SignUpPage su = new SignUpPage();
             su.Show();
             this.Close();
