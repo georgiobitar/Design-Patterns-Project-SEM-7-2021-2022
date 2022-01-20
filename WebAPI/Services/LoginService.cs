@@ -1,6 +1,7 @@
 ﻿using Infrastructure;
 using Infrastructure.Model.DataContracts.Requests;
 using Infrastructure.Model.DataContracts.Responses;
+using Infrastructure.Models;
 using Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace WebAPI.Services
 
         public LoginService(IRepository<User> userRepository) //Dependency Injection
         {
-            this.userRepository = new UserRepository();
+            this.userRepository = userRepository;
         }
         public LoginResponseDTO Login(LoginRequestDTO loginRequest)
         {

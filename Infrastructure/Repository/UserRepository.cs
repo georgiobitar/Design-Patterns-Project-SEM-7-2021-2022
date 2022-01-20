@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,10 +10,11 @@ namespace Infrastructure.Repository
 {
     public class UserRepository : IRepository<User>
     {
-        protected DBDataContext context;
-        public UserRepository() 
+        protected DesignPatterns20212022_TRAFFICSIMULATORContext context;
+        
+        public UserRepository(DesignPatterns20212022_TRAFFICSIMULATORContext context)
         {
-            this.context = new DBDataContext();
+            this.context = context;
         }
 
         public User Add(User entity)
@@ -27,7 +29,8 @@ namespace Infrastructure.Repository
 
         public User Find(Expression<Func<User, bool>> predicate)
         {
-            return context.Users.FirstOrDefault(predicate);
+            var x = context.Users.FirstOrDefault(predicate) ?? null;
+            return x;
         }
 
         public User Get(Guid id)
@@ -37,7 +40,7 @@ namespace Infrastructure.Repository
 
         public void SaveChanges()
         {
-            context.SubmitChanges();
+            context.SaveChanges();
         }
 
         public User Update(User entity)

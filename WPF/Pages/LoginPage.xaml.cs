@@ -1,6 +1,4 @@
-﻿using Infrastructure;
-using Infrastructure.Model.DataContracts.Responses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;

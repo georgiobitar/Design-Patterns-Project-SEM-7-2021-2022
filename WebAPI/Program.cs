@@ -1,5 +1,7 @@
 using Infrastructure;
+using Infrastructure.Models;
 using Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,10 +12,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
- 
+builder.Services.AddTransient<DesignPatterns20212022_TRAFFICSIMULATORContext>();
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
 builder.Services.AddTransient<ILoginService, LoginService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,8 +28,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-//MapControllers();
+app.MapControllers();
 
 app.Run();
-
-
