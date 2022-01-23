@@ -12,7 +12,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<DesignPatterns20212022_TRAFFICSIMULATORContext>();
+//builder.Services.AddTransient<DesignPatterns20212022_TRAFFICSIMULATORContext>();
+builder.Services.AddDbContext<DesignPatterns20212022_TRAFFICSIMULATORContext>(options => options.UseSqlServer("Name=DesignDatabase"));
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
 builder.Services.AddTransient<ILoginService, LoginService>();
 var app = builder.Build();

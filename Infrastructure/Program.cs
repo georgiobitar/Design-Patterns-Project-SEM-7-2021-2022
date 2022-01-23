@@ -10,4 +10,4 @@ app.MapGet("/", () => "Hello World!");
 
 app.Run();
 
-builder.Services.AddTransient<DesignPatterns20212022_TRAFFICSIMULATORContext>();
+builder.Services.AddDbContext<DesignPatterns20212022_TRAFFICSIMULATORContext>(options => options.UseSqlServer("Name=DesignDatabase"));

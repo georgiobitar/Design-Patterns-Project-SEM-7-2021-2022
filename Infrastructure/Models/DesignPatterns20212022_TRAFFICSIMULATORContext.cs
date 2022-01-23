@@ -20,10 +20,10 @@ namespace Infrastructure.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Name=DesignDatabase");
-            }
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    optionsBuilder.UseSqlServer("Name=DesignDatabase");
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
