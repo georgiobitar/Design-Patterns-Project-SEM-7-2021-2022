@@ -8,7 +8,7 @@ namespace Infrastructure.Model.DataContracts.Responses
 {
     public class Response
     {
-        public string Message;
-        public string Status;
+        public string Message { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace Infrastructure.Model.DataContracts.Responses
 {
     public class LoginResponseDTO : Response
     {
-        public bool Success;
+        public bool Success { get; set; }
     }
 }

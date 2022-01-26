@@ -1,4 +1,5 @@
 using Infrastructure.Model.DataContracts.Requests;
+using Infrastructure.Model.DataContracts.Responses;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Services;
 
@@ -22,10 +23,11 @@ namespace WebAPI.Controllers
             this.loginService = loginService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public bool Get()
+        [HttpPost(Name = "GetWeatherForecast")]
+        public LoginResponseDTO Post(LoginRequestDTO loginRequest)
         {
-            return loginService.Login(new LoginRequestDTO() { UserName = "jounix", Password = "12345" }).Success;
+           var x = loginService.Login(new LoginRequestDTO() { UserName = loginRequest.UserName, Password = loginRequest.Password });
+            return x;
         }
     }
 }
