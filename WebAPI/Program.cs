@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddTransient<DesignPatterns20212022_TRAFFICSIMULATORContext>();
 builder.Services.AddDbContext<DesignPatterns20212022_TRAFFICSIMULATORContext>(options => options.UseSqlServer("Name=DesignDatabase"));
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
-builder.Services.AddTransient<ILoginService, LoginService>();
+builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

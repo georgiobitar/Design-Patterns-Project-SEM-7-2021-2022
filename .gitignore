@@ -365,3 +365,4 @@ FodyWeavers.xsd
 
 /WebAPI/appsettings.json
 /WebAPI/appsettings.Development.json
+/WPF/ServiceEndpoints.cs

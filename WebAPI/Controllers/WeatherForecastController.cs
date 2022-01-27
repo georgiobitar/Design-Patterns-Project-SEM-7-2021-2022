@@ -15,9 +15,9 @@ namespace WebAPI.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly ILoginService loginService;
+        private readonly IAuthenticationService loginService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, ILoginService loginService)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IAuthenticationService loginService)
         {
             _logger = logger;
             this.loginService = loginService;

@@ -19,7 +19,9 @@ namespace Infrastructure.Repository
 
         public User Add(User entity)
         {
-            throw new NotImplementedException();
+            context.Users.Add(entity);
+            SaveChanges();
+            return entity;
         }
 
         public IEnumerable<User> All()

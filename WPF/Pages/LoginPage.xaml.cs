@@ -31,9 +31,8 @@ namespace WPF
 
         private async void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            HttpClient httpClient = new HttpClient();
             LoginRequestDTO loginRequest = new LoginRequestDTO() { UserName = UserNameTextBox.Text, Password = PasswordTextBox.Text };
-            LoginResponseDTO response = await "https://localhost:7004/Authentication".PostJsonAsync(loginRequest).ReceiveJson<LoginResponseDTO>();
+            LoginResponseDTO response = await (ServiceEndpoints.Endpoint+"/Authentication/Login").PostJsonAsync(loginRequest).ReceiveJson<LoginResponseDTO>(); //using Flurl
             MessageBox.Show(response.Message);
             if (response.Success)
             {

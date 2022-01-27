@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Flurl.Http;
+using Infrastructure.Model.Requests;
+using Infrastructure.Model.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +18,27 @@ using System.Windows.Shapes;
 
 namespace WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class SignUpPage : Window
     {
         public SignUpPage()
         {
             InitializeComponent();
+        }
+
+        private async void SignUpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SignUpRequestDTO signUpRequest = new SignUpRequestDTO()
+            {
+                UserName = UserNameTB.Text,
+                FirstName = FirstNameTB.Text,
+                LastName = LastNameTB.Text,
+                Email = EmailTB.Text,
+                PhoneNumber = MobileTB.Text,
+                Country = CountryTB.Text,
+                Password = PasswordTB.Text
+            };
+            SignUpResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/SignUp").PostJsonAsync(signUpRequest).ReceiveJson<SignUpResponseDTO>();
+            MessageBox.Show(response.Message);
         }
     }
 }
