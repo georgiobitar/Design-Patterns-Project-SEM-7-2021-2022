@@ -40,6 +40,10 @@ namespace Infrastructure.Repository
             throw new NotImplementedException();
         }
 
+        public List<User> GetAll()
+        {
+            return context.Users.ToList();
+        }
         public void SaveChanges()
         {
             context.SaveChanges();

@@ -13,6 +13,7 @@ namespace Infrastructure
         T Add(T entity);
         T Update(T entity);
         T Get(Guid id);
+        List<T> GetAll();
 
         T Find(Expression<Func<User, bool>> predicate);
         IEnumerable<T> All();

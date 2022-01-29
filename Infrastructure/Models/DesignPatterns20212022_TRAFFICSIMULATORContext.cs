@@ -30,9 +30,11 @@ namespace Infrastructure.Models
         {
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.UserName);
 
                 entity.ToTable("User");
+
+                entity.Property(e => e.UserName).HasMaxLength(50);
 
                 entity.Property(e => e.Country).HasMaxLength(50);
 
@@ -55,8 +57,6 @@ namespace Infrastructure.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.UserId).ValueGeneratedOnAdd();
-
-                entity.Property(e => e.UserName).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);

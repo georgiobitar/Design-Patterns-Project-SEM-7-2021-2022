@@ -47,7 +47,9 @@ namespace WebAPI.Services
         {
             try
             {
-                if (userRepository.Find(u => u.UserName == signUpRequest.UserName) != null)
+                List<User> users = new List<User>();
+                users = userRepository.GetAll();
+                if (users.Find(u => u.UserName == signUpRequest.UserName)!=null)
                 {
                     return new SignUpResponseDTO()
                     {
@@ -55,7 +57,7 @@ namespace WebAPI.Services
                         Message = "UserName Already Exists!"
                     };
                 }
-                if (userRepository.Find(u => u.Email == signUpRequest.Email) != null)
+                if (users.Find(u => u.Email == signUpRequest.Email) != null)
                 {
                     return new SignUpResponseDTO()
                     {
@@ -63,7 +65,7 @@ namespace WebAPI.Services
                         Message = "Email Already Exists!"
                     };
                 }
-                if (userRepository.Find(u => u.PhoneNumber == signUpRequest.PhoneNumber) != null)
+                if (users.Find(u => u.PhoneNumber == signUpRequest.PhoneNumber) != null)
                 {
                     return new SignUpResponseDTO()
                     {
@@ -71,7 +73,7 @@ namespace WebAPI.Services
                         Message = "Phone Already Exists!"
                     };
                 }
-                User user = new User() //add pk
+                User user = new User() 
                 {
                     UserName = signUpRequest.UserName,
                     FirstName = signUpRequest.FirstName,
