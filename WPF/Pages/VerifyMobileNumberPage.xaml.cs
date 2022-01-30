@@ -11,22 +11,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF
+namespace WPF.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for VerifyMobileNumberPage.xaml
     /// </summary>
-    public partial class MainPage : Window
+    public partial class VerifyMobileNumberPage : Window
     {
         private readonly User user;
 
-        public MainPage(User user)
+        public VerifyMobileNumberPage(User user)
         {
             InitializeComponent();
             this.user = user;
+            VerifyMobileFrame.NavigationService.Navigate(new VerifyMobileSendCodePage(this.user));
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

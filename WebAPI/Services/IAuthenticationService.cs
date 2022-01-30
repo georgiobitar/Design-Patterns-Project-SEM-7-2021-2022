@@ -10,5 +10,13 @@ namespace WebAPI.Services
         LoginResponseDTO Login(LoginRequestDTO loginRequest);
 
         SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest);
+
+        VerifyMobileCodeResponseDTO VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO);
+
+        SendMobileCodeResponseDTO SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO);
+
+        VerifyEmailCodeResponseDTO VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO);
+
+        SendEmailCodeResponseDTO SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequestDTO);
     }
 }

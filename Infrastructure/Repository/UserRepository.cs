@@ -49,9 +49,16 @@ namespace Infrastructure.Repository
             context.SaveChanges();
         }
 
-        public User Update(User entity)
+        public User Update(User entity, List<string> columns)
         {
-            throw new NotImplementedException();
+            foreach(string column in columns)
+            {
+                context.Entry(entity).Property(column).IsModified = true;
+
+            }
+            SaveChanges();
+            return entity;
+
         }
     }
 }

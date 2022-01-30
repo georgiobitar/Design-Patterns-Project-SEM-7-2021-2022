@@ -11,22 +11,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF
+namespace WPF.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for VerifyEmailPage.xaml
     /// </summary>
-    public partial class MainPage : Window
+    public partial class VerifyEmailPage : Window
     {
         private readonly User user;
 
-        public MainPage(User user)
+        public VerifyEmailPage(User user)
         {
             InitializeComponent();
             this.user = user;
+            VerifyEmailFrame.NavigationService.Navigate(new VerifyEmailSendCode(this.user));
+
         }
     }
 }

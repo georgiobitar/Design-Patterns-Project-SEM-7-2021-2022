@@ -21,16 +21,19 @@ namespace WebAPI.Services
         {
             this.userRepository = userRepository;
         }
+
         public LoginResponseDTO Login(LoginRequestDTO loginRequest)
         {
-            
+
             try
             {
-                bool correct = userRepository.Find(u => u.UserName == loginRequest.UserName && u.Password == loginRequest.Password) != null;
+                User user = userRepository.Find(u => u.UserName == loginRequest.UserName && u.Password == loginRequest.Password);
+                bool correct = user != null;
                 return new LoginResponseDTO()
                 {
                     Success = correct,
-                    Message = correct ? "Sign in Successful" : "Wrong UserName or Password"
+                    Message = correct ? "Sign in Successful" : "Wrong UserName or Password",
+                    User = user
                 };
             }
             catch (Exception ex)
@@ -38,7 +41,7 @@ namespace WebAPI.Services
                 return new LoginResponseDTO()
                 {
                     Success = false,
-                    Message = "Error Has Occured: " + ex 
+                    Message = "Error Has Occured: " + ex
                 };
             }
         }
@@ -49,7 +52,7 @@ namespace WebAPI.Services
             {
                 List<User> users = new List<User>();
                 users = userRepository.GetAll();
-                if (users.Find(u => u.UserName == signUpRequest.UserName)!=null)
+                if (users.Find(u => u.UserName == signUpRequest.UserName) != null)
                 {
                     return new SignUpResponseDTO()
                     {
@@ -73,7 +76,7 @@ namespace WebAPI.Services
                         Message = "Phone Already Exists!"
                     };
                 }
-                User user = new User() 
+                User user = new User()
                 {
                     UserName = signUpRequest.UserName,
                     FirstName = signUpRequest.FirstName,
@@ -92,7 +95,7 @@ namespace WebAPI.Services
                     Message = "Sign Up Successfull! Login to continue the verification process!"
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new SignUpResponseDTO()
                 {
@@ -100,6 +103,151 @@ namespace WebAPI.Services
                     Message = "Error has occured" + ex
                 };
             }
+        }
+        public SendMobileCodeResponseDTO SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
+        {
+            try
+            {
+                Random r = new Random();
+                int randNum = r.Next(1000000);
+                string sixDigitNumber = randNum.ToString("D6");
+
+                User user = sendMobileCodeRequestDTO.User;
+                user.PhoneCode = sixDigitNumber;
+                userRepository.Update(user, new List<string>() { "PhoneCode"});
+                Logger.Log("The mobile code for " + user.UserName + " is " + user.PhoneCode);
+                return new SendMobileCodeResponseDTO()
+                {
+                    Success = true,
+                    Message = "Code Sent Successfully to your Mobile Number!"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SendMobileCodeResponseDTO()
+                {
+                    Success = false,
+                    Message = "Error has occured" + ex
+                };
+            }
+        }
+
+        public VerifyMobileCodeResponseDTO VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO)
+        {
+            try
+            {
+                User user = userRepository.Find(u => u.UserName == verifyMobileCodeRequestDTO.Username);
+                if (user == null || user.PhoneCode == null)
+                {
+                    return new VerifyMobileCodeResponseDTO()
+                    {
+                        Success = false,
+                        Message = "Error has occured"
+                    };
+                }
+
+
+                if (user.PhoneCode == verifyMobileCodeRequestDTO.MobileCode)
+                {
+                    user.PhoneNumberVerified = "true";
+                    userRepository.Update(user, new List<string>() { "PhoneNumberVerified" });
+                    return new VerifyMobileCodeResponseDTO()
+                    {
+                        Success = true,
+                        Message = "Mobile Verified Successfully!",
+                        User = user
+                    };
+                }
+                return new VerifyMobileCodeResponseDTO()
+                {
+                    Success = false,
+                    Message = "Wrong Code!"
+                };
+
+
+            }
+            catch (Exception ex)
+            {
+                return new VerifyMobileCodeResponseDTO()
+                {
+                    Success = false,
+                    Message = "Error has occured" + ex
+                };
+            }
+
+        }
+
+        public SendEmailCodeResponseDTO SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequest)
+        {
+            try
+            {
+                Random r = new Random();
+                int randNum = r.Next(1000000);
+                string sixDigitNumber = randNum.ToString("D6");
+
+                User user = sendEmailCodeRequest.User;
+                user.EmailCode = sixDigitNumber;
+                userRepository.Update(user, new List<string>() { "EmailCode" });
+                Logger.Log("The email code for " + user.UserName + " is " + user.EmailCode);
+                return new SendEmailCodeResponseDTO()
+                {
+                    Success = true,
+                    Message = "Code Sent Successfully to your Email!"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SendEmailCodeResponseDTO()
+                {
+                    Success = false,
+                    Message = "Error has occured" + ex
+                };
+            }
+        }
+
+        public VerifyEmailCodeResponseDTO VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO)
+        {
+            try
+            {
+                User user = userRepository.Find(u => u.UserName == verifyEmailCodeRequestDTO.Username);
+                if (user == null || user.EmailCode == null)
+                {
+                    return new VerifyEmailCodeResponseDTO()
+                    {
+                        Success = false,
+                        Message = "Error has occured"
+                    };
+                }
+
+
+                if (user.EmailCode == verifyEmailCodeRequestDTO.EmailCode)
+                {
+                    user.EmailVerified = "true";
+                    userRepository.Update(user, new List<string>() { "EmailVerified" });
+                    return new VerifyEmailCodeResponseDTO()
+                    {
+                        Success = true,
+                        Message = "Email Verified Successfully!",
+                        User = user
+                    };
+                }
+                return new VerifyEmailCodeResponseDTO()
+                {
+                    Success = false,
+                    Message = "Wrong Code!"
+                };
+
+
+            }
+            catch (Exception ex)
+            {
+                return new VerifyEmailCodeResponseDTO()
+                {
+                    Success = false,
+                    Message = "Error has occured" + ex
+                };
+            }
+
         }
     }
 }

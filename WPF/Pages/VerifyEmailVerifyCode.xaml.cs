@@ -1,13 +1,11 @@
 ﻿using Flurl.Http;
-using Infrastructure.Model.DataContracts.Requests;
-using Infrastructure.Model.DataContracts.Responses;
 using Infrastructure.Model.enums;
-using Newtonsoft.Json;
+using Infrastructure.Model.Requests;
+using Infrastructure.Model.Responses;
+using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,24 +17,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WebAPI.Exceptions;
 using WebAPI.Handlers;
-using WebAPI.Services;
-using WPF.Pages;
 
-namespace WPF
+namespace WPF.Pages
 {
-    public partial class LoginPage : Window
+    /// <summary>
+    /// Interaction logic for VerifyEmailVerifyCode.xaml
+    /// </summary>
+    public partial class VerifyEmailVerifyCode : Page
     {
-        public LoginPage()
+        private readonly User user;
+
+        public VerifyEmailVerifyCode(User user)
         {
             InitializeComponent();
+            this.user = user;
         }
 
-        private async void SignInButton_Click(object sender, RoutedEventArgs e)
+        private async void VerifyCodeButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginRequestDTO loginRequest = new LoginRequestDTO() { UserName = UserNameTextBox.Text, Password = PasswordTextBox.Text };
-            LoginResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/Login").PostJsonAsync(loginRequest).ReceiveJson<LoginResponseDTO>(); //using Flurl
+            VerifyEmailCodeRequestDTO verifyemailCodeRequestDTO = new VerifyEmailCodeRequestDTO() { Username = user.UserName, EmailCode = CodeTB.Text };
+            VerifyEmailCodeResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/VerifyEmailCode").PostJsonAsync(verifyemailCodeRequestDTO).ReceiveJson<VerifyEmailCodeResponseDTO>();
             MessageBox.Show(response.Message);
             if (response.Success)
             {
@@ -50,35 +51,28 @@ namespace WPF
                     switch (handler.Status)
                     {
                         case NextPageStatus.VerifyMobileNumber:
+                            App.Current.Windows[0].Close();
                             VerifyMobileNumberPage v = new VerifyMobileNumberPage(response.User);
                             v.Show();
-                            this.Close();
                             break;
 
                         case NextPageStatus.VerifyEmail:
+                            App.Current.Windows[0].Close();
                             VerifyEmailPage ve = new VerifyEmailPage(response.User);
                             ve.Show();
-                            this.Close();
                             break;
                         default:
+                            App.Current.Windows[0].Close();
                             MainPage mp = new MainPage(response.User);
                             mp.Show();
-                            this.Close();
                             break;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Error occured");
                 }
             }
-        }
-
-        private void SignUpButton_Click(object sender, RoutedEventArgs e)
-        {
-            SignUpPage su = new SignUpPage();
-            su.Show();
-            this.Close();
         }
     }
 }

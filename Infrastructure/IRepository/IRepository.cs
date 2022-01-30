@@ -11,7 +11,7 @@ namespace Infrastructure
     public interface IRepository<T>
     {
         T Add(T entity);
-        T Update(T entity);
+        T Update(T entity, List<string> columns);
         T Get(Guid id);
         List<T> GetAll();
 

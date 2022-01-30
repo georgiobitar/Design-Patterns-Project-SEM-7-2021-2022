@@ -11,8 +11,10 @@ namespace Infrastructure.Models
         public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string EmailVerified { get; set; } = null!;
+        public string? EmailCode { get; set; }
         public string PhoneNumber { get; set; } = null!;
         public string PhoneNumberVerified { get; set; } = null!;
+        public string? PhoneCode { get; set; }
         public string Country { get; set; } = null!;
         public string Password { get; set; } = null!;
     }
