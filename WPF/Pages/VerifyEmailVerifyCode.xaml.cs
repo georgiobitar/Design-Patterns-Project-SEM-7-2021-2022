@@ -51,20 +51,20 @@ namespace WPF.Pages
                     switch (handler.Status)
                     {
                         case NextPageStatus.VerifyMobileNumber:
-                            App.Current.Windows[0].Close();
                             VerifyMobileNumberPage v = new VerifyMobileNumberPage(response.User);
                             v.Show();
+                            App.Current.Windows[0].Close();
                             break;
 
                         case NextPageStatus.VerifyEmail:
-                            App.Current.Windows[0].Close();
                             VerifyEmailPage ve = new VerifyEmailPage(response.User);
                             ve.Show();
+                            App.Current.Windows[0].Close();
                             break;
                         default:
-                            App.Current.Windows[0].Close();
                             MainPage mp = new MainPage(response.User);
                             mp.Show();
+                            App.Current.Windows[0].Close();
                             break;
                     }
                 }
