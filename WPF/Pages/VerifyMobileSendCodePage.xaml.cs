@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WebAPI.Services;
+using WebAPI.Structural;
+
 
 namespace WPF.Pages
 {
@@ -27,10 +29,10 @@ namespace WPF.Pages
     {
         public readonly User user;
 
-        public VerifyMobileSendCodePage(User user)
+        public VerifyMobileSendCodePage()
         {
             InitializeComponent();
-            this.user = user;
+            this.user = Singleton.GetUser();
         }
 
         private async void VerifyButton_Click(object sender, RoutedEventArgs e)
@@ -42,7 +44,7 @@ namespace WPF.Pages
                 MessageBox.Show(response.Message);
                 if (response.Success)
                 {
-                    NavigationService.Navigate(new VerifyMobileVerifyCode(user));
+                    NavigationService.Navigate(new VerifyMobileVerifyCode());
                 }
             }
             else

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WebAPI.Structural;
 
 namespace WPF.Pages
 {
@@ -22,11 +23,11 @@ namespace WPF.Pages
     {
         private readonly User user;
 
-        public VerifyEmailPage(User user)
+        public VerifyEmailPage()
         {
             InitializeComponent();
-            this.user = user;
-            VerifyEmailFrame.NavigationService.Navigate(new VerifyEmailSendCode(this.user));
+            this.user = Singleton.GetUser();
+            VerifyEmailFrame.NavigationService.Navigate(new VerifyEmailSendCode());
 
         }
     }

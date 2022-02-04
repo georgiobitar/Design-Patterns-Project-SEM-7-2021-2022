@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebAPI.Structural;
+
 
 namespace WPF
 {
@@ -23,10 +25,10 @@ namespace WPF
     {
         private readonly User user;
 
-        public MainPage(User user)
+        public MainPage()
         {
             InitializeComponent();
-            this.user = user;
+            this.user = Singleton.GetUser();
         }
     }
 }

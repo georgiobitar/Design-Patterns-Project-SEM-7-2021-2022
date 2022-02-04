@@ -54,7 +54,6 @@ namespace Infrastructure.Repository
             foreach(string column in columns)
             {
                 context.Entry(entity).Property(column).IsModified = true;
-
             }
             SaveChanges();
             return entity;

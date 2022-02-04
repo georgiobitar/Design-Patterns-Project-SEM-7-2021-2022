@@ -39,6 +39,14 @@ namespace WPF
             };
             SignUpResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/SignUp").PostJsonAsync(signUpRequest).ReceiveJson<SignUpResponseDTO>();
             MessageBox.Show(response.Message);
+            if(response.Success)
+            {
+                LoginPage loginPage = new LoginPage();
+                loginPage.Show();
+                this.Close();
+            }
+
+
         }
     }
 }

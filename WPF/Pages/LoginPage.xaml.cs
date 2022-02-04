@@ -2,6 +2,7 @@
 using Infrastructure.Model.DataContracts.Requests;
 using Infrastructure.Model.DataContracts.Responses;
 using Infrastructure.Model.enums;
+using Infrastructure.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ using System.Windows.Shapes;
 using WebAPI.Exceptions;
 using WebAPI.Handlers;
 using WebAPI.Services;
+using WebAPI.Structural;
 using WPF.Pages;
 
 namespace WPF
@@ -32,6 +34,7 @@ namespace WPF
         {
             InitializeComponent();
         }
+
 
         private async void SignInButton_Click(object sender, RoutedEventArgs e)
         {
@@ -47,21 +50,26 @@ namespace WPF
                     handler.SetNext(new EmailVerifiedHandler());
                     handler.Handle(response.User);
 
+                    Singleton.SetUser(response.User); //Caching the User
+                    User u1 = Singleton.GetUser();
+                    u1.UserName = "qwe";
+                    Singleton.SetUser(u1); //Caching the User
+                    
                     switch (handler.Status)
                     {
                         case NextPageStatus.VerifyMobileNumber:
-                            VerifyMobileNumberPage v = new VerifyMobileNumberPage(response.User);
+                            VerifyMobileNumberPage v = new VerifyMobileNumberPage();
                             v.Show();
                             this.Close();
                             break;
 
                         case NextPageStatus.VerifyEmail:
-                            VerifyEmailPage ve = new VerifyEmailPage(response.User);
+                            VerifyEmailPage ve = new VerifyEmailPage();
                             ve.Show();
                             this.Close();
                             break;
                         default:
-                            MainPage mp = new MainPage(response.User);
+                            MainPage mp = new MainPage();
                             mp.Show();
                             this.Close();
                             break;

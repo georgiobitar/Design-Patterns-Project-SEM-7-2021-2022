@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WebAPI.Structural;
+
 
 namespace WPF.Pages
 {
@@ -22,11 +24,11 @@ namespace WPF.Pages
     {
         private readonly User user;
 
-        public VerifyMobileNumberPage(User user)
+        public VerifyMobileNumberPage()
         {
             InitializeComponent();
-            this.user = user;
-            VerifyMobileFrame.NavigationService.Navigate(new VerifyMobileSendCodePage(this.user));
+            this.user = Singleton.GetUser();
+            VerifyMobileFrame.NavigationService.Navigate(new VerifyMobileSendCodePage());
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

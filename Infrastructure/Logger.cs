@@ -26,6 +26,29 @@
             }
 
         }
+
+        public static void Log(string text, string pathh)
+        {
+            // This text is added only once to the file.
+            if (!File.Exists(pathh))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(pathh))
+                {
+                    sw.WriteLine(text);
+                }
+            }
+            else
+            {
+                // This text is always added, making the file longer over time
+                // if it is not deleted.
+                using (StreamWriter sw = File.AppendText(pathh))
+                {
+                    sw.WriteLine(text);
+                }
+            }
+
+        }
     }
 
 }

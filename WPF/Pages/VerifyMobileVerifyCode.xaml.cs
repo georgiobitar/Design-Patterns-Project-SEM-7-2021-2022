@@ -18,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WebAPI.Handlers;
+using WebAPI.Structural;
+
 
 namespace WPF.Pages
 {
@@ -28,10 +30,10 @@ namespace WPF.Pages
     {
         private readonly User user;
 
-        public VerifyMobileVerifyCode(User user)
+        public VerifyMobileVerifyCode()
         {
             InitializeComponent();
-            this.user = user;
+            this.user = Singleton.GetUser();
         }
 
         private async void VerifyCodeButton_Click(object sender, RoutedEventArgs e)
@@ -51,19 +53,19 @@ namespace WPF.Pages
                     switch (handler.Status)
                     {
                         case NextPageStatus.VerifyMobileNumber:
-                            VerifyMobileNumberPage v = new VerifyMobileNumberPage(response.User);
+                            VerifyMobileNumberPage v = new VerifyMobileNumberPage();
                             v.Show();
                             App.Current.Windows[0].Close();
 
                             break;
 
                         case NextPageStatus.VerifyEmail:
-                            VerifyEmailPage ve = new VerifyEmailPage(response.User);
+                            VerifyEmailPage ve = new VerifyEmailPage();
                             ve.Show();
                             App.Current.Windows[0].Close();
                             break;
                         default:
-                            MainPage mp = new MainPage(response.User);
+                            MainPage mp = new MainPage();
                             mp.Show();
                             App.Current.Windows[0].Close();
                             break;
