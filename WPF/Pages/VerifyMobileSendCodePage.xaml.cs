@@ -44,6 +44,7 @@ namespace WPF.Pages
                 MessageBox.Show(response.Message);
                 if (response.Success)
                 {
+                    Singleton.SetUser(response.User);
                     NavigationService.Navigate(new VerifyMobileVerifyCode());
                 }
             }

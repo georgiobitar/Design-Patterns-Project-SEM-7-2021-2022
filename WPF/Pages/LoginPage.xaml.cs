@@ -49,12 +49,8 @@ namespace WPF
 
                     handler.SetNext(new EmailVerifiedHandler());
                     handler.Handle(response.User);
-
                     Singleton.SetUser(response.User); //Caching the User
-                    User u1 = Singleton.GetUser();
-                    u1.UserName = "qwe";
-                    Singleton.SetUser(u1); //Caching the User
-                    
+
                     switch (handler.Status)
                     {
                         case NextPageStatus.VerifyMobileNumber:

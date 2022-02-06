@@ -30,6 +30,7 @@ namespace WebAPI.Services
             {
                 User user = userRepository.Find(u => u.UserName == loginRequest.UserName && u.Password == loginRequest.Password);
                 bool correct = user != null;
+                    
                 return new LoginResponseDTO()
                 {
                     Success = correct,
@@ -116,12 +117,13 @@ namespace WebAPI.Services
                 User user = sendMobileCodeRequestDTO.User;
                 user.PhoneCode = sixDigitNumber;
                 userRepository.Update(user, new List<string>() { "PhoneCode"});
-                Singleton.SetUser(user);
+                
                 Logger.Log("The mobile code for " + user.UserName + " is " + user.PhoneCode);
                 return new SendMobileCodeResponseDTO()
                 {
                     Success = true,
-                    Message = "Code Sent Successfully to your Mobile Number!"
+                    Message = "Code Sent Successfully to your Mobile Number!",
+                    User = user
                 };
             }
             catch (Exception ex)
@@ -153,7 +155,7 @@ namespace WebAPI.Services
                 {
                     user.PhoneNumberVerified = "true";
                     userRepository.Update(user, new List<string>() { "PhoneNumberVerified" });
-                    Singleton.SetUser(user);
+                    
                     return new VerifyMobileCodeResponseDTO()
                     {
                         Success = true,
@@ -191,12 +193,13 @@ namespace WebAPI.Services
                 User user = sendEmailCodeRequest.User;
                 user.EmailCode = sixDigitNumber;
                 userRepository.Update(user, new List<string>() { "EmailCode" });
-                Singleton.SetUser(user);
+                
                 Logger.Log("The email code for " + user.UserName + " is " + user.EmailCode);
                 return new SendEmailCodeResponseDTO()
                 {
                     Success = true,
-                    Message = "Code Sent Successfully to your Email!"
+                    Message = "Code Sent Successfully to your Email!",
+                    User = user
                 };
             }
             catch (Exception ex)
@@ -228,7 +231,7 @@ namespace WebAPI.Services
                 {
                     user.EmailVerified = "true";
                     userRepository.Update(user, new List<string>() { "EmailVerified" });
-                    Singleton.SetUser(user);
+                   
                     return new VerifyEmailCodeResponseDTO()
                     {
                         Success = true,

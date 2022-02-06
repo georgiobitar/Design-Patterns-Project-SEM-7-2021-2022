@@ -44,8 +44,8 @@ namespace WPF.Pages
             {
                 try
                 {
+                    Singleton.SetUser(response.User);
                     var handler = new PhoneNumberVerifiedHandler();
-
                     handler.SetNext(new EmailVerifiedHandler());
                     handler.Handle(response.User);
 

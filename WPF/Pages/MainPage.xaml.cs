@@ -29,6 +29,7 @@ namespace WPF
         {
             InitializeComponent();
             this.user = Singleton.GetUser();
+            
         }
     }
 }
