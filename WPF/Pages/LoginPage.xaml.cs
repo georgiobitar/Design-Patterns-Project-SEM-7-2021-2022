@@ -38,44 +38,59 @@ namespace WPF
 
         private async void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginRequestDTO loginRequest = new LoginRequestDTO() { UserName = UserNameTextBox.Text, Password = PasswordTextBox.Text };
-            LoginResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/Login").PostJsonAsync(loginRequest).ReceiveJson<LoginResponseDTO>(); //using Flurl
-            MessageBox.Show(response.Message);
-            if (response.Success)
+            if (Valid())
             {
-                try
+                LoginRequestDTO loginRequest = new LoginRequestDTO() { UserName = UserNameTextBox.Text, Password = PasswordTextBox.Text };
+                LoginResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/Login").PostJsonAsync(loginRequest).ReceiveJson<LoginResponseDTO>(); //using Flurl
+                MessageBox.Show(response.Message);
+                if (response.Success)
                 {
-                    var handler = new PhoneNumberVerifiedHandler();
-
-                    handler.SetNext(new EmailVerifiedHandler());
-                    handler.Handle(response.User);
-                    Singleton.SetUser(response.User); //Caching the User
-
-                    switch (handler.Status)
+                    try
                     {
-                        case NextPageStatus.VerifyMobileNumber:
-                            VerifyMobileNumberPage v = new VerifyMobileNumberPage();
-                            v.Show();
-                            this.Close();
-                            break;
+                        var handler = new PhoneNumberVerifiedHandler();
 
-                        case NextPageStatus.VerifyEmail:
-                            VerifyEmailPage ve = new VerifyEmailPage();
-                            ve.Show();
-                            this.Close();
-                            break;
-                        default:
-                            MainPage mp = new MainPage();
-                            mp.Show();
-                            this.Close();
-                            break;
+                        handler.SetNext(new EmailVerifiedHandler());
+                        handler.Handle(response.User);
+                        Singleton.SetUser(response.User); //Caching the User
+
+                        switch (handler.Status)
+                        {
+                            case NextPageStatus.VerifyMobileNumber:
+                                VerifyMobileNumberPage v = new VerifyMobileNumberPage();
+                                v.Show();
+                                this.Close();
+                                break;
+
+                            case NextPageStatus.VerifyEmail:
+                                VerifyEmailPage ve = new VerifyEmailPage();
+                                ve.Show();
+                                this.Close();
+                                break;
+                            default:
+                                MainPage mp = new MainPage();
+                                mp.Show();
+                                this.Close();
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error occured");
                     }
                 }
-                catch(Exception ex)
-                {
-                    MessageBox.Show("Error occured");
-                }
             }
+
+        }
+
+        private bool Valid()
+        {
+            if (UserNameTextBox.Text == "" || PasswordTextBox.Text == "")
+            {
+                MessageBox.Show("Please fill all fields");
+                return false;
+            }
+            else
+                return true;
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
@@ -83,6 +98,29 @@ namespace WPF
             SignUpPage su = new SignUpPage();
             su.Show();
             this.Close();
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        private void ButtonMaxmize_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = Application.Current.MainWindow.WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
         }
     }
 }

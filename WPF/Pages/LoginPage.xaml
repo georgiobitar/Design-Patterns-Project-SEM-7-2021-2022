@@ -5,15 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="500">
+        Title="MainWindow" Height="650" Width="1200"
+        Background="#36393F"
+        WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
     <Grid>
-        <Label x:Name="LoginLabel" Content="Login" HorizontalAlignment="Center" Margin="0,59,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="UserNameLabel" Content="UserName" HorizontalAlignment="Left" Margin="74,141,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="PasswordLabel" Content="Password" HorizontalAlignment="Left" Margin="74,199,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Margin="183,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="183,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="SignInButton" Content="Sign In" HorizontalAlignment="Left" Height="26" Margin="130,254,0,0" VerticalAlignment="Top" Width="62" Click="SignInButton_Click"/>
-        <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Left" Height="26" Margin="250,254,0,0" VerticalAlignment="Top" Width="62" Click="SignUpButton_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Border Grid.ColumnSpan="3" Background="#252525">
+            <Grid HorizontalAlignment="Stretch">
+                <Label Content="MyChatApp" Foreground="Gray" FontWeight="SemiBold" MouseDown="Label_MouseDown"/>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Width="20" Height="20" Content="🗕" Background="Transparent" BorderThickness="0" Foreground="Gray" FontWeight="Bold" Margin="0,0,0,3" Click="ButtonMinimize_Click"/>
+                    <Button Width="20" Height="20" Content="🗖" Background="Transparent" BorderThickness="0" Foreground="Gray" FontWeight="Bold" Click="ButtonMaxmize_Click"/>
+                    <Button Width="20" Height="20" Content="✕" Background="Transparent" BorderThickness="0" Foreground="Gray" FontWeight="Bold" Click="ButtonClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border BorderThickness="0" Grid.ColumnSpan="1"
+        CornerRadius="50,50,50,50" BorderBrush="Black" Background="#252525" Margin="73,116,43,273"/>
+            <Label x:Name="LoginLabel" Content="Login" HorizontalAlignment="Left" Margin="195,60,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="SemiBold"/>
+            <Label x:Name="UserNameLabel" Content="UserName" HorizontalAlignment="Left" Margin="93,174,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="SemiBold"/>
+            <Label x:Name="PasswordLabel" Content="Password" HorizontalAlignment="Left" Margin="93,232,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="SemiBold"/>
+            <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Margin="193,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="193,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Button x:Name="SignInButton" Content="Sign In" HorizontalAlignment="Left" Height="26" Margin="138,286,0,0" VerticalAlignment="Top" Width="62" Click="SignInButton_Click"  Foreground="Black" FontWeight="SemiBold">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Left" Height="26" Margin="222,286,0,0" VerticalAlignment="Top" Width="62" Click="SignUpButton_Click" Foreground="Black" FontWeight="SemiBold">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

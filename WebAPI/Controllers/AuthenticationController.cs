@@ -14,7 +14,8 @@ namespace WebAPI.Controllers
 
         public AuthenticationController(IAuthenticationService authenticationService)
         {
-
+            Console.WriteLine("test");
+            Console.Write(" nice");
             this.authenticationService = authenticationService;
         }
 
