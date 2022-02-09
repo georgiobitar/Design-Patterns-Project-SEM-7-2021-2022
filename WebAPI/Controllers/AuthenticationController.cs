@@ -72,6 +72,7 @@ namespace WebAPI.Controllers
             try
             {
                 VerifyMobileCodeResponseDTO res = authenticationService.VerifyMobileCode(verifyMobileCodeRequest);
+               
                 return Ok(res);
             }
             catch(Exception ex)

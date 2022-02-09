@@ -1,9 +1,15 @@
-﻿namespace Infrastructure
+﻿using System.Management.Automation;
+using System.Xml;
+using ToastNotifications;
+using ToastNotifications.Position;
+using WebAPI.Structural;
+
+namespace WebAPI
 {
     public static class Logger
     {
         public static string path = @"H:\DesignPatternsProjectLogs.txt";
-
+        //private static string username = "";
         public static void Log(string text)
         {
             // This text is added only once to the file.
@@ -28,8 +34,12 @@
         }
 
         public static void Log(string text, string pathh)
-        {
+        { 
+        //{
+        //    if (Singleton.GetUser() != null)
+        //    { username = Singleton.GetUser().UserName + ": "; }
             // This text is added only once to the file.
+            
             if (!File.Exists(pathh))
             {
                 // Create a file to write to.
@@ -47,8 +57,10 @@
                     sw.WriteLine(text);
                 }
             }
-
+            
         }
+
+
     }
 
 }

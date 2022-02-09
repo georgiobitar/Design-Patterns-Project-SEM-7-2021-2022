@@ -20,12 +20,12 @@ namespace WPF.ViewModel
         public string  Message { get; set; }
         public ObservableCollection<string> Messages { get; set; }
         public ObservableCollection<User> Users { get; set; }
-        private Server server;
+        private NormalServer server;
         public MainViewModel()
         {
             Users = new ObservableCollection<User>();
             Messages = new ObservableCollection<string>();
-            this.server = new Server();
+            this.server = new NormalServer();
             this.server.connectedEvent += UserConnected;
             this.server.messageReceivedEvent += MessageReceived;
             this.server.userDisconnectedEvent += UserDisconnected;

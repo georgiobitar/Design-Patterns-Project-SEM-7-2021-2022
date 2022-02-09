@@ -7,7 +7,7 @@ namespace WPF.Net
 {
     public class Server
     {
-        TcpClient client;
+        public TcpClient client;
         public PacketReader packetReader;
         public event Action connectedEvent;
         public event Action messageReceivedEvent;
@@ -21,10 +21,10 @@ namespace WPF.Net
         {
             if (!client.Connected)
             {
-                client.Connect("127.0.0.1", 7891);
+                client.Connect("127.0.0.1", 7891); //trying to connect
                 packetReader = new PacketReader(client.GetStream());
 
-                if (!string.IsNullOrEmpty(username))
+                if (!string.IsNullOrEmpty(username))    //sending to the server the user name of the user connected
                 {
                     var connectPacket = new PacketBuilder();
                     connectPacket.WriteOpCode(0);
@@ -39,19 +39,19 @@ namespace WPF.Net
         {
             Task.Run(() =>
             {
-                while(true)
+                while (true)
                 {
                     var opcode = packetReader.ReadByte();
-                    switch(opcode)
+                    switch (opcode)
                     {
-                        case 1:
+                        case 1: //receive new users connected event
                             connectedEvent?.Invoke();
                             break;
 
-                        case 5:
+                        case 5: //receive new messages from other user event
                             messageReceivedEvent?.Invoke();
                             break;
-                        case 10:
+                        case 10:    //receive new user disconnected event
                             userDisconnectedEvent?.Invoke();
                             break;
                         default:
@@ -62,7 +62,7 @@ namespace WPF.Net
             });
         }
 
-        public void SendMessageToServer(string message)
+        public virtual void SendMessageToServer(string message) //Sending message to the chat server aka the mediator
         {
             var messagePacket = new PacketBuilder();
             messagePacket.WriteOpCode(5);
