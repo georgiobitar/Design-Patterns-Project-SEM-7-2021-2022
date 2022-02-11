@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ChatServer.Behavioral;
 using Infrastructure.Models;
+using WebAPI.Structural;
 using WPF.Core;
 using WPF.Net;
 
@@ -25,6 +26,7 @@ namespace WPF.ViewModel
         {
             Users = new ObservableCollection<User>();
             Messages = new ObservableCollection<string>();
+            this.Username = Singleton.GetUser().UserName;
             this.server = new NormalServer();
             this.server.connectedEvent += UserConnected;
             this.server.messageReceivedEvent += MessageReceived;

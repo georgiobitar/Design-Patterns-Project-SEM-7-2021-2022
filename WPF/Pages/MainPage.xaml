@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel>
-            <TextBox Height="25" DockPanel.Dock="Top" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Height="25" DockPanel.Dock="Top" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
             <Button Height="25" DockPanel.Dock="Top" Content="Connect" Command="{Binding ConnectToServerCommand}"/>
             <ListView ItemsSource="{Binding Users}">
                 <ListView.ItemTemplate>

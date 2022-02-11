@@ -4,6 +4,7 @@ using Infrastructure.Model.DataContracts.Responses;
 using Infrastructure.Model.Requests;
 using Infrastructure.Model.Responses;
 using System.Diagnostics;
+using System.Management.Automation;
 
 namespace WebAPI.Services.Decorators
 {
@@ -22,8 +23,7 @@ namespace WebAPI.Services.Decorators
             LoginResponseDTO loginResponseDTO = authenticationService.Login(loginRequest);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
-            Logger.Log($"Logged in, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
-
+            Logger.Log(DateTime.Now + $" Logged in, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return loginResponseDTO;
         }
 
@@ -33,7 +33,7 @@ namespace WebAPI.Services.Decorators
             SendEmailCodeResponseDTO sendEmailCodeResponseDTO = authenticationService.SendEmailCode(sendEmailCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
-            Logger.Log($"Sent Email code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
+            Logger.Log(DateTime.Now + $" Sent Email code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return sendEmailCodeResponseDTO;
         }
 
@@ -43,7 +43,7 @@ namespace WebAPI.Services.Decorators
             SendMobileCodeResponseDTO sendMobileCodeResponseDTO = authenticationService.SendMobileCode(sendMobileCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
-            Logger.Log($"Sent Mobile Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
+            Logger.Log(DateTime.Now + $" Sent Mobile Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return sendMobileCodeResponseDTO;
         }
 
@@ -53,7 +53,7 @@ namespace WebAPI.Services.Decorators
             SignUpResponseDTO signUpResponseDTO = authenticationService.SignUp(signUpRequest);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
-            Logger.Log($"Signed Up, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
+            Logger.Log(DateTime.Now + $" Signed Up, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return signUpResponseDTO;
         }
 
@@ -63,7 +63,7 @@ namespace WebAPI.Services.Decorators
             VerifyEmailCodeResponseDTO verifyEmailCodeResponseDTO = authenticationService.VerifyEmailCode(verifyEmailCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
-            Logger.Log($"Verified Email Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
+            Logger.Log(DateTime.Now + $" Verified Email Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return verifyEmailCodeResponseDTO;
         }
 
@@ -73,7 +73,7 @@ namespace WebAPI.Services.Decorators
             VerifyMobileCodeResponseDTO verifyMobileCodeResponseDTO = authenticationService.VerifyMobileCode(verifyMobileCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
-            Logger.Log($"Verified Mobile Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
+            Logger.Log(DateTime.Now + $" Verified Mobile Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return verifyMobileCodeResponseDTO;
         }
     }

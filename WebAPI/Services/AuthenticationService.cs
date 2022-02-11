@@ -10,7 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Position;
 using WebAPI.Structural;
+using System.Windows;
 
 namespace WebAPI.Services
 {
@@ -30,22 +34,27 @@ namespace WebAPI.Services
             {
                 User user = userRepository.Find(u => u.UserName == loginRequest.UserName && u.Password == loginRequest.Password);
                 bool correct = user != null;
-                    
+
                 return new LoginResponseDTO()
                 {
                     Success = correct,
                     Message = correct ? "Sign in Successful" : "Wrong UserName or Password",
                     User = user
                 };
+
+
             }
             catch (Exception ex)
             {
+
                 return new LoginResponseDTO()
                 {
                     Success = false,
                     Message = "Error Has Occured: " + ex
                 };
+
             }
+
         }
 
         public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest)
@@ -116,8 +125,8 @@ namespace WebAPI.Services
 
                 User user = sendMobileCodeRequestDTO.User;
                 user.PhoneCode = sixDigitNumber;
-                userRepository.Update(user, new List<string>() { "PhoneCode"});
-                
+                userRepository.Update(user, new List<string>() { "PhoneCode" });
+
                 Logger.Log("The mobile code for " + user.UserName + " is " + user.PhoneCode);
                 return new SendMobileCodeResponseDTO()
                 {
@@ -155,7 +164,7 @@ namespace WebAPI.Services
                 {
                     user.PhoneNumberVerified = "true";
                     userRepository.Update(user, new List<string>() { "PhoneNumberVerified" });
-                    
+
                     return new VerifyMobileCodeResponseDTO()
                     {
                         Success = true,
@@ -193,7 +202,7 @@ namespace WebAPI.Services
                 User user = sendEmailCodeRequest.User;
                 user.EmailCode = sixDigitNumber;
                 userRepository.Update(user, new List<string>() { "EmailCode" });
-                
+
                 Logger.Log("The email code for " + user.UserName + " is " + user.EmailCode);
                 return new SendEmailCodeResponseDTO()
                 {
@@ -231,7 +240,7 @@ namespace WebAPI.Services
                 {
                     user.EmailVerified = "true";
                     userRepository.Update(user, new List<string>() { "EmailVerified" });
-                   
+
                     return new VerifyEmailCodeResponseDTO()
                     {
                         Success = true,

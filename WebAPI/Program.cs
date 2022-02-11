@@ -18,6 +18,7 @@ builder.Services.AddDbContext<DesignPatterns20212022_TRAFFICSIMULATORContext>(op
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.Decorate<IAuthenticationService>((inner, provider) => new AuthenticationServiceLoggingDecorator(inner));
+builder.Services.Decorate<IAuthenticationService>((inner, provider) => new AuthenticationServiceNotificationDecorator(inner));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
