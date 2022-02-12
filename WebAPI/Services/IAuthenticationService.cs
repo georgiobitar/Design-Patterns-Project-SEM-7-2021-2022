@@ -9,7 +9,7 @@ namespace WebAPI.Services
     {
         LoginResponseDTO Login(LoginRequestDTO loginRequest);
 
-        SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest);
+        SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin);
 
         VerifyMobileCodeResponseDTO VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO);
 

@@ -47,10 +47,10 @@ namespace WebAPI.Services.Decorators
             return sendMobileCodeResponseDTO;
         }
 
-        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest)
+        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            SignUpResponseDTO signUpResponseDTO = authenticationService.SignUp(signUpRequest);
+            SignUpResponseDTO signUpResponseDTO = authenticationService.SignUp(signUpRequest, isAdmin);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
             Logger.Log(DateTime.Now + $" Signed Up, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");

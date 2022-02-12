@@ -41,7 +41,23 @@ namespace WebAPI.Controllers
             try
             {
 
-                SignUpResponseDTO res = authenticationService.SignUp(signUpRequest);
+                SignUpResponseDTO res = authenticationService.SignUp(signUpRequest,false);
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new SignUpResponseDTO() { Success = false, Message = "An erro has occured" + ex });
+            }
+        }
+
+        [HttpPost]
+        [Route("[controller]/SignUpAdmin")]
+        public async Task<ActionResult<SignUpResponseDTO>> SignUpAdmin(SignUpRequestDTO signUpRequest)
+        {
+            try
+            {
+
+                SignUpResponseDTO res = authenticationService.SignUp(signUpRequest,true);
                 return Ok(res);
             }
             catch (Exception ex)

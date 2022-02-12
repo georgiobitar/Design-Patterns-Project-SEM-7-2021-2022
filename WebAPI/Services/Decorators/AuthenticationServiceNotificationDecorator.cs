@@ -19,17 +19,20 @@ namespace WebAPI.Services.Decorators
 
         public LoginResponseDTO Login(LoginRequestDTO loginRequest)
         {
-            
+
             LoginResponseDTO loginResponseDTO = authenticationService.Login(loginRequest);
-            
-            var ps1File = @"H:\BurntToast\Login.ps1";
-            var startInfo = new ProcessStartInfo()
+            if (loginResponseDTO.Success)
             {
-                FileName = "powershell.exe",
-                Arguments = $"-NoProfile -ExecutionPolicy unrestricted \"{ps1File}\"",
-                UseShellExecute = false
-            };
-            Process.Start(startInfo);
+                var ps1File = @"H:\BurntToast\Login.ps1";
+                var startInfo = new ProcessStartInfo()
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -ExecutionPolicy unrestricted \"{ps1File}\"",
+                    UseShellExecute = false
+                };
+                Process.Start(startInfo);
+            }
+
             return loginResponseDTO;
         }
 
@@ -39,22 +42,26 @@ namespace WebAPI.Services.Decorators
         }
 
         public SendMobileCodeResponseDTO SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
-        { 
+        {
             return authenticationService.SendMobileCode(sendMobileCodeRequestDTO);
         }
 
-        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest)
+        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
         {
-            
-            SignUpResponseDTO signUpResponseDTO = authenticationService.SignUp(signUpRequest);
-            var ps1File = @"H:\BurntToast\SignUp.ps1";
-            var startInfo = new ProcessStartInfo()
+
+            SignUpResponseDTO signUpResponseDTO = authenticationService.SignUp(signUpRequest, isAdmin);
+            if (signUpResponseDTO.Success)
             {
-                FileName = "powershell.exe",
-                Arguments = $"-NoProfile -ExecutionPolicy unrestricted \"{ps1File}\"",
-                UseShellExecute = false
-            };
-            Process.Start(startInfo);
+                var ps1File = @"H:\BurntToast\SignUp.ps1";
+                var startInfo = new ProcessStartInfo()
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -ExecutionPolicy unrestricted \"{ps1File}\"",
+                    UseShellExecute = false
+                };
+                Process.Start(startInfo);
+            }
+
             return signUpResponseDTO;
         }
 

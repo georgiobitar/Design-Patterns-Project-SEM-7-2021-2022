@@ -17,6 +17,6 @@ namespace Infrastructure.Models
         public string? PhoneCode { get; set; }
         public string Country { get; set; } = null!;
         public string Password { get; set; } = null!;
-
+        public string IsAdmin { get; set; } = null!;
     }
 }

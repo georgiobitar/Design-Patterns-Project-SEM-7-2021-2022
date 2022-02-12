@@ -21,7 +21,7 @@ namespace WPF.ViewModel
         public string  Message { get; set; }
         public ObservableCollection<string> Messages { get; set; }
         public ObservableCollection<User> Users { get; set; }
-        private NormalServer server;
+        private Server server;
         public MainViewModel()
         {
             Users = new ObservableCollection<User>();

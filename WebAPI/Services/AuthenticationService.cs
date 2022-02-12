@@ -57,7 +57,7 @@ namespace WebAPI.Services
 
         }
 
-        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest)
+        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
         {
             try
             {
@@ -97,7 +97,8 @@ namespace WebAPI.Services
                     PhoneNumber = signUpRequest.PhoneNumber,
                     PhoneNumberVerified = "false",
                     Country = signUpRequest.Country,
-                    Password = signUpRequest.Password
+                    Password = signUpRequest.Password,
+                    IsAdmin = (isAdmin)? "true" : "false"
                 };
                 userRepository.Add(user);
                 return new SignUpResponseDTO()

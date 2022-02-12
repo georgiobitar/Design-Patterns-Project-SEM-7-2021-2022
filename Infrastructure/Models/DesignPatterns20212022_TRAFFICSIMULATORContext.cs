@@ -20,10 +20,6 @@ namespace Infrastructure.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    optionsBuilder.UseSqlServer("Name=DesignDatabase");
-            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,6 +43,10 @@ namespace Infrastructure.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.FirstName).HasMaxLength(50);
+
+                entity.Property(e => e.IsAdmin)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.LastName).HasMaxLength(50);
 
