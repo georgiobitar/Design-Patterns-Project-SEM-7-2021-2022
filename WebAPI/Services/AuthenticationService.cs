@@ -15,6 +15,8 @@ using ToastNotifications.Lifetime;
 using ToastNotifications.Position;
 using WebAPI.Structural;
 using System.Windows;
+using System.Net.Mail;
+using System.Net;
 
 namespace WebAPI.Services
 {

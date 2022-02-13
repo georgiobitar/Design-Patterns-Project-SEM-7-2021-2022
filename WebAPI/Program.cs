@@ -1,4 +1,5 @@
 using Infrastructure;
+using Infrastructure.DataBaseFactory;
 using Infrastructure.Models;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //Dependency Injection 
-builder.Services.AddDbContext<DesignPatterns20212022_TRAFFICSIMULATORContext>(options => options.UseSqlServer("Name=DesignDatabase"));
+var connectionString = new DataBaseFactory().ChooseDbContext();
+builder.Services.AddDbContext<DesignPatterns20212022_TRAFFICSIMULATORContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.Decorate<IAuthenticationService>((inner, provider) => new AuthenticationServiceLoggingDecorator(inner));

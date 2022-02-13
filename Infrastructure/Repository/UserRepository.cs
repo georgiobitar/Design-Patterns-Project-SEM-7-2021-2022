@@ -1,4 +1,6 @@
-﻿using Infrastructure.Models;
+﻿using Infrastructure.DataBaseFactory;
+using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,7 @@ namespace Infrastructure.Repository
 {
     public class UserRepository : IRepository<User>
     {
-        protected DesignPatterns20212022_TRAFFICSIMULATORContext context;
-        
+        private DesignPatterns20212022_TRAFFICSIMULATORContext context;
         public UserRepository(DesignPatterns20212022_TRAFFICSIMULATORContext context)
         {
             this.context = context;

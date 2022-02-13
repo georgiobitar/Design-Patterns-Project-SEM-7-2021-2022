@@ -71,7 +71,7 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-
+        
         <Label x:Name="CfPasswordLabel" Content="Conf. Password:" HorizontalAlignment="Left" Height="26" Margin="10,326,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" Width="96"/>
         <TextBox x:Name="CfPasswordTB" HorizontalAlignment="Left" Height="26" Margin="111,326,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="141">
             <TextBox.Resources>

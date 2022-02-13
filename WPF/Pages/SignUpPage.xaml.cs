@@ -27,26 +27,42 @@ namespace WPF
 
         private async void SignUpBtn_Click(object sender, RoutedEventArgs e)
         {
-            SignUpRequestDTO signUpRequest = new SignUpRequestDTO()
+            if (IsValid())
             {
-                UserName = UserNameTB.Text,
-                FirstName = FirstNameTB.Text,
-                LastName = LastNameTB.Text,
-                Email = EmailTB.Text,
-                PhoneNumber = MobileTB.Text,
-                Country = CountryTB.Text,
-                Password = PasswordTB.Text
-            };
-            SignUpResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/SignUp").PostJsonAsync(signUpRequest).ReceiveJson<SignUpResponseDTO>();
-            MessageBox.Show(response.Message);
-            if(response.Success)
+                SignUpRequestDTO signUpRequest = new SignUpRequestDTO()
+                {
+                    UserName = UserNameTB.Text,
+                    FirstName = FirstNameTB.Text,
+                    LastName = LastNameTB.Text,
+                    Email = EmailTB.Text,
+                    PhoneNumber = MobileTB.Text,
+                    Country = CountryTB.Text,
+                    Password = PasswordTB.Text
+                };
+                SignUpResponseDTO response = await (ServiceEndpoints.Endpoint + "/Authentication/SignUp").PostJsonAsync(signUpRequest).ReceiveJson<SignUpResponseDTO>();
+                MessageBox.Show(response.Message);
+                if (response.Success)
+                {
+                    LoginPage loginPage = new LoginPage();
+                    loginPage.Show();
+                    this.Close();
+                }
+            }
+        }
+
+        private bool IsValid()
+        {
+            if (PasswordTB.Text != CfPasswordTB.Text)
             {
-                LoginPage loginPage = new LoginPage();
-                loginPage.Show();
-                this.Close();
+                MessageBox.Show("Password not equal to confirm Password");
+                return false;
             }
 
+            bool valid = (UserNameTB.Text != "" && FirstNameTB.Text != "" && LastNameTB.Text != "" && EmailTB.Text != "" && MobileTB.Text != "" && CountryTB.Text != "" && PasswordTB.Text != "");
+            if (!valid)
+                MessageBox.Show("Make sure to fill all fields!");
 
+            return valid;
         }
     }
 }
