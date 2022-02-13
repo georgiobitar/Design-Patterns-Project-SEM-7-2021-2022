@@ -7,6 +7,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
+                <ResourceDictionary Source="./Themes/UserCard.xaml" />
+                <ResourceDictionary Source="./Themes/ChatItem.xaml" />
+                <ResourceDictionary Source="./Themes/MessageBox.xaml" />
+                <ResourceDictionary Source="./Themes/StylingScrollBar.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

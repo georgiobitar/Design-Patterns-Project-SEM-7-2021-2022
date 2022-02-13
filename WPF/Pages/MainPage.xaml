@@ -5,38 +5,106 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF" xmlns:viewmodel="clr-namespace:WPF.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="474" Width="816">
+        Title="MainWindow" Height="650" Width="1200"
+        Background="#36393F" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
 
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <DockPanel>
-            <TextBox Height="25" DockPanel.Dock="Top" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
-            <Button Height="25" DockPanel.Dock="Top" Content="Connect" Command="{Binding ConnectToServerCommand}"/>
-            <ListView ItemsSource="{Binding Users}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding UserName}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+        <Border Grid.ColumnSpan="2" Background="#252525">
+            <Grid HorizontalAlignment="Stretch">
+                <Label Content="MyChatApp" Foreground="Gray" FontWeight="SemiBold" MouseDown="Label_MouseDown"/>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button x:Name="MinimizeButton" Width="20" Height="20" Content="🗕" Background="Transparent" BorderThickness="0" Foreground="Gray" FontWeight="Bold" Margin="0,0,0,3" Click="MinimizeButton_Click" />
+                    <Button x:Name="MaximizeButton" Width="20" Height="20" Content="🗖" Background="Transparent" BorderThickness="0" Foreground="Gray" FontWeight="Bold" Click="MaximizeButton_Click" />
+                    <Button x:Name="CloseButton" Width="20" Height="20" Content="✕" Background="Transparent" BorderThickness="0" Foreground="Gray" FontWeight="Bold" Click="CloseButton_Click"  />
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <Grid Background="#2F3136" Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Contacts"
+                   VerticalAlignment="Center"
+                   FontWeight="Medium"
+                   Foreground="Gray"
+                   Margin="8,0,0,0"/>
+            
+            <ListView ItemsSource="{Binding Users}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Grid.Row="1"
+                      ItemContainerStyle="{StaticResource UserCard}">
             </ListView>
-        </DockPanel>
 
-        <StackPanel Grid.Column="1">
-            <ListView Height="380"
-                      ItemsSource="{Binding Messages}"/>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Background="#292B2F">
+                <Border CornerRadius="25"
+                        Width="30" Height="30"
+                        Background="#3Bff6f"
+                        Margin="10,0,0,0"/>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBox Height="55" Width="545" VerticalContentAlignment="Center" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Width="55" Content="Send" Command="{Binding SendMessageCommand}"/>
+                <StackPanel VerticalAlignment="Center">
+                    <Label Content="{Binding Username}" Foreground="White" FontWeight="SemiBold" Margin="0,-5,0,-5"/>
+                    <Label Content="Online" Foreground="Gray" FontWeight="SemiBold" FontSize="10" Margin="0,-8,0,-5"/>
+                </StackPanel>
+
             </StackPanel>
-        </StackPanel>
+            
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="#2F3136" BorderThickness="0,0,0,2">
+                <Grid HorizontalAlignment="Stretch" Margin="8">
+                    <Label Content="@Username" Foreground="White" FontWeight="Bold" Margin="5,0,5,0" VerticalAlignment="Center" FontSize="15"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ListView Grid.Row="1" 
+                      ItemsSource="{Binding Messages}" Foreground="white" Background="Transparent" BorderThickness="0" FontWeight="SemiBold" Margin="8,0,0,0"/>
+
+            <Grid Background="Transparent" Grid.Row="2" >
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox Grid.Row="1" Height="50" VerticalContentAlignment="Center"  Style="{StaticResource MessageBox}" Grid.ColumnSpan="2"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,16,0">
+                    <Button Width="20" Height="20" Margin="5,5,16,0" Grid.Column="1" Command="{Binding SendMessageCommand}" Background="Transparent" BorderThickness="0">
+                        <Image Width="20" Height="20" Source="H:\GitHub\DesignPatterns\Design Patterns Project SEM 7 2021-2022\WPF\Icons\Send.png"/>
+                    </Button>
+                </StackPanel>
+                
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

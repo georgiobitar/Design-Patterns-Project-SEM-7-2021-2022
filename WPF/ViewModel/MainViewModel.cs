@@ -15,10 +15,10 @@ namespace WPF.ViewModel
 {
     public class MainViewModel
     {
-        public RelayCommand ConnectToServerCommand { get; set; }
+        //public RelayCommand ConnectToServerCommand { get; set; }
         public RelayCommand SendMessageCommand { get; set; }
-        public string  Username { get; set; }
-        public string  Message { get; set; }
+        public string Username { get; set; }
+        public string Message { get; set; }
         public ObservableCollection<string> Messages { get; set; }
         public ObservableCollection<User> Users { get; set; }
         private Server server;
@@ -27,11 +27,12 @@ namespace WPF.ViewModel
             Users = new ObservableCollection<User>();
             Messages = new ObservableCollection<string>();
             this.Username = Singleton.GetUser().UserName;
-            this.server = new NormalServer();
+            this.server = (Singleton.GetUser().IsAdmin == "true") ? new AdminServer() : new NormalServer();
             this.server.connectedEvent += UserConnected;
             this.server.messageReceivedEvent += MessageReceived;
             this.server.userDisconnectedEvent += UserDisconnected;
-            ConnectToServerCommand = new RelayCommand(o => this.server.ConnectToServer(Username), o => !string.IsNullOrEmpty(Username));
+            this.server.ConnectToServer(Username);
+            //ConnectToServerCommand = new RelayCommand(o => this.server.ConnectToServer(Username), o => !string.IsNullOrEmpty(Username));
             SendMessageCommand = new RelayCommand(o => this.server.SendMessageToServer(Message), o => !string.IsNullOrEmpty(Message));
         }
 
@@ -54,7 +55,7 @@ namespace WPF.ViewModel
             {
                 UserName = this.server.packetReader.ReadMessage(),
             };
-            if(!Users.Any(x=>x.UserName == user.UserName))
+            if (!Users.Any(x => x.UserName == user.UserName))
             {
                 Application.Current.Dispatcher.Invoke(() => Users.Add(user));
             }
