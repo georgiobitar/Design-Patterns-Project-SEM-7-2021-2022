@@ -9,10 +9,8 @@ namespace Infrastructure.DataBaseFactory
         {
             var db = Reader.ReadContextChoice();
 
-
             if (db == 1)
                 return "Name=DesignDatabase";
-
 
             else
                 return "Name=DesignDatabase2";

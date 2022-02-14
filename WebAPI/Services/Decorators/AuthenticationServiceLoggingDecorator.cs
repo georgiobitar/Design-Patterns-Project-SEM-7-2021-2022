@@ -17,60 +17,60 @@ namespace WebAPI.Services.Decorators
             this.authenticationService = authenticationService;
         }
 
-        public LoginResponseDTO Login(LoginRequestDTO loginRequest)
+        public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequest)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            LoginResponseDTO loginResponseDTO = authenticationService.Login(loginRequest);
+            LoginResponseDTO loginResponseDTO = await authenticationService.Login(loginRequest);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
             Logger.Log(DateTime.Now + $" Logged in, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return loginResponseDTO;
         }
 
-        public SendEmailCodeResponseDTO SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequestDTO)
+        public async Task<SendEmailCodeResponseDTO> SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequestDTO)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            SendEmailCodeResponseDTO sendEmailCodeResponseDTO = authenticationService.SendEmailCode(sendEmailCodeRequestDTO);
+            SendEmailCodeResponseDTO sendEmailCodeResponseDTO = await authenticationService.SendEmailCode(sendEmailCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
             Logger.Log(DateTime.Now + $" Sent Email code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return sendEmailCodeResponseDTO;
         }
 
-        public SendMobileCodeResponseDTO SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
+        public async Task<SendMobileCodeResponseDTO> SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            SendMobileCodeResponseDTO sendMobileCodeResponseDTO = authenticationService.SendMobileCode(sendMobileCodeRequestDTO);
+            SendMobileCodeResponseDTO sendMobileCodeResponseDTO = await authenticationService.SendMobileCode(sendMobileCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
             Logger.Log(DateTime.Now + $" Sent Mobile Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return sendMobileCodeResponseDTO;
         }
 
-        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
+        public async Task<SignUpResponseDTO> SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            SignUpResponseDTO signUpResponseDTO = authenticationService.SignUp(signUpRequest, isAdmin);
+            SignUpResponseDTO signUpResponseDTO = await authenticationService.SignUp(signUpRequest, isAdmin);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
             Logger.Log(DateTime.Now + $" Signed Up, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return signUpResponseDTO;
         }
 
-        public VerifyEmailCodeResponseDTO VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO)
+        public async Task<VerifyEmailCodeResponseDTO> VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            VerifyEmailCodeResponseDTO verifyEmailCodeResponseDTO = authenticationService.VerifyEmailCode(verifyEmailCodeRequestDTO);
+            VerifyEmailCodeResponseDTO verifyEmailCodeResponseDTO = await authenticationService.VerifyEmailCode(verifyEmailCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
             Logger.Log(DateTime.Now + $" Verified Email Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");
             return verifyEmailCodeResponseDTO;
         }
 
-        public VerifyMobileCodeResponseDTO VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO)
+        public async Task<VerifyMobileCodeResponseDTO> VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            VerifyMobileCodeResponseDTO verifyMobileCodeResponseDTO = authenticationService.VerifyMobileCode(verifyMobileCodeRequestDTO);
+            VerifyMobileCodeResponseDTO verifyMobileCodeResponseDTO = await authenticationService.VerifyMobileCode(verifyMobileCodeRequestDTO);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
             Logger.Log(DateTime.Now + $" Verified Mobile Code, Elapsed ms : {elapsedMillis}", @"H:\DesignPatternsProjectTimeLogs.txt");

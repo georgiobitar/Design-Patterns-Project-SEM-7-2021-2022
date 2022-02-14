@@ -50,8 +50,9 @@ namespace WPF
                 {
                     try
                     {
+                        //Creating the Handler
                         var handler = new PhoneNumberVerifiedHandler();
-
+                        //Appending handlers
                         handler.SetNext(new EmailVerifiedHandler());
                         handler.Handle(response.User);
                         Singleton.SetUser(response.User); //Caching the User

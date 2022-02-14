@@ -15,7 +15,6 @@ namespace WPF.ViewModel
 {
     public class MainViewModel
     {
-        //public RelayCommand ConnectToServerCommand { get; set; }
         public RelayCommand SendMessageCommand { get; set; }
         public string Username { get; set; }
         public string Message { get; set; }
@@ -32,7 +31,6 @@ namespace WPF.ViewModel
             this.server.messageReceivedEvent += MessageReceived;
             this.server.userDisconnectedEvent += UserDisconnected;
             this.server.ConnectToServer(Username);
-            //ConnectToServerCommand = new RelayCommand(o => this.server.ConnectToServer(Username), o => !string.IsNullOrEmpty(Username));
             SendMessageCommand = new RelayCommand(o => this.server.SendMessageToServer(Message), o => !string.IsNullOrEmpty(Message));
         }
 

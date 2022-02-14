@@ -10,12 +10,12 @@ namespace Infrastructure
 {
     public interface IRepository<T>
     {
-        T Add(T entity);
-        T Update(T entity, List<string> columns);
+        Task<T> Add(T entity);
+        Task<T> Update(T entity, List<string> columns);
         T Get(Guid id);
-        List<T> GetAll();
+        Task<List<T>> GetAll();
 
-        T Find(Expression<Func<User, bool>> predicate);
+        Task<T> Find(Expression<Func<User, bool>> predicate);
         IEnumerable<T> All();
 
         void SaveChanges();

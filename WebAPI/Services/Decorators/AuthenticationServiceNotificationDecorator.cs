@@ -17,10 +17,10 @@ namespace WebAPI.Services.Decorators
             this.authenticationService = authenticationService;
         }
 
-        public LoginResponseDTO Login(LoginRequestDTO loginRequest)
+        public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequest)
         {
 
-            LoginResponseDTO loginResponseDTO = authenticationService.Login(loginRequest);
+            LoginResponseDTO loginResponseDTO = await authenticationService.Login(loginRequest);
             if (loginResponseDTO.Success)
             {
                 var ps1File = @"H:\BurntToast\Login.ps1";
@@ -36,20 +36,20 @@ namespace WebAPI.Services.Decorators
             return loginResponseDTO;
         }
 
-        public SendEmailCodeResponseDTO SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequestDTO)
+        public async Task<SendEmailCodeResponseDTO> SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequestDTO)
         {
-            return authenticationService.SendEmailCode(sendEmailCodeRequestDTO);
+            return await authenticationService.SendEmailCode(sendEmailCodeRequestDTO);
         }
 
-        public SendMobileCodeResponseDTO SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
+        public async Task<SendMobileCodeResponseDTO> SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
         {
-            return authenticationService.SendMobileCode(sendMobileCodeRequestDTO);
+            return await authenticationService.SendMobileCode(sendMobileCodeRequestDTO);
         }
 
-        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
+        public async Task<SignUpResponseDTO> SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
         {
 
-            SignUpResponseDTO signUpResponseDTO = authenticationService.SignUp(signUpRequest, isAdmin);
+            SignUpResponseDTO signUpResponseDTO = await authenticationService.SignUp(signUpRequest, isAdmin);
             if (signUpResponseDTO.Success)
             {
                 var ps1File = @"H:\BurntToast\SignUp.ps1";
@@ -65,14 +65,14 @@ namespace WebAPI.Services.Decorators
             return signUpResponseDTO;
         }
 
-        public VerifyEmailCodeResponseDTO VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO)
+        public async Task<VerifyEmailCodeResponseDTO> VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO)
         {
-            return authenticationService.VerifyEmailCode(verifyEmailCodeRequestDTO);
+            return await authenticationService.VerifyEmailCode(verifyEmailCodeRequestDTO);
         }
 
-        public VerifyMobileCodeResponseDTO VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO)
+        public async Task<VerifyMobileCodeResponseDTO> VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO)
         {
-            return authenticationService.VerifyMobileCode(verifyMobileCodeRequestDTO);
+            return await authenticationService.VerifyMobileCode(verifyMobileCodeRequestDTO);
         }
     }
 }

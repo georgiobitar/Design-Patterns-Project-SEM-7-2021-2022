@@ -18,9 +18,9 @@ namespace Infrastructure.Repository
             this.context = context;
         }
 
-        public User Add(User entity)
+        public async Task<User> Add(User entity)
         {
-            context.Users.Add(entity);
+            await context.Users.AddAsync(entity);
             SaveChanges();
             return entity;
         }
@@ -30,9 +30,9 @@ namespace Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public User Find(Expression<Func<User, bool>> predicate)
+        public async Task<User> Find(Expression<Func<User, bool>> predicate)
         {
-            var x = context.Users.FirstOrDefault(predicate) ?? null;
+            var x = await context.Users.FirstOrDefaultAsync(predicate) ?? null;
             return x;
         }
 
@@ -41,22 +41,22 @@ namespace Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public List<User> GetAll()
+        public async Task<List<User>> GetAll()
         {
-            return context.Users.ToList();
+            return await context.Users.ToListAsync();
         }
         public void SaveChanges()
         {
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
-        public User Update(User entity, List<string> columns)
+        public async Task<User> Update(User entity, List<string> columns)
         {
             foreach(string column in columns)
             {
                 context.Entry(entity).Property(column).IsModified = true;
             }
-            SaveChanges();
+            await context.SaveChangesAsync();
             return entity;
 
         }

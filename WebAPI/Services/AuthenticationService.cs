@@ -29,12 +29,12 @@ namespace WebAPI.Services
             this.userRepository = userRepository;
         }
 
-        public LoginResponseDTO Login(LoginRequestDTO loginRequest)
+        public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequest)
         {
 
             try
             {
-                User user = userRepository.Find(u => u.UserName == loginRequest.UserName && u.Password == loginRequest.Password);
+                User user = await userRepository.Find(u => u.UserName == loginRequest.UserName && u.Password == loginRequest.Password);
                 bool correct = user != null;
 
                 return new LoginResponseDTO()
@@ -59,12 +59,12 @@ namespace WebAPI.Services
 
         }
 
-        public SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
+        public async Task<SignUpResponseDTO> SignUp(SignUpRequestDTO signUpRequest, bool isAdmin)
         {
             try
             {
                 List<User> users = new List<User>();
-                users = userRepository.GetAll();
+                users = await userRepository.GetAll();
                 if (users.Find(u => u.UserName == signUpRequest.UserName) != null)
                 {
                     return new SignUpResponseDTO()
@@ -102,7 +102,7 @@ namespace WebAPI.Services
                     Password = signUpRequest.Password,
                     IsAdmin = (isAdmin)? "true" : "false"
                 };
-                userRepository.Add(user);
+                await userRepository.Add(user);
                 return new SignUpResponseDTO()
                 {
                     Success = true,
@@ -118,7 +118,7 @@ namespace WebAPI.Services
                 };
             }
         }
-        public SendMobileCodeResponseDTO SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
+        public async Task<SendMobileCodeResponseDTO> SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace WebAPI.Services
 
                 User user = sendMobileCodeRequestDTO.User;
                 user.PhoneCode = sixDigitNumber;
-                userRepository.Update(user, new List<string>() { "PhoneCode" });
+                await userRepository.Update(user, new List<string>() { "PhoneCode" });
 
                 Logger.Log("The mobile code for " + user.UserName + " is " + user.PhoneCode);
                 return new SendMobileCodeResponseDTO()
@@ -148,11 +148,11 @@ namespace WebAPI.Services
             }
         }
 
-        public VerifyMobileCodeResponseDTO VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO)
+        public async Task<VerifyMobileCodeResponseDTO> VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO)
         {
             try
             {
-                User user = userRepository.Find(u => u.UserName == verifyMobileCodeRequestDTO.Username);
+                User user = await userRepository.Find(u => u.UserName == verifyMobileCodeRequestDTO.Username);
                 if (user == null || user.PhoneCode == null)
                 {
                     return new VerifyMobileCodeResponseDTO()
@@ -166,7 +166,7 @@ namespace WebAPI.Services
                 if (user.PhoneCode == verifyMobileCodeRequestDTO.MobileCode)
                 {
                     user.PhoneNumberVerified = "true";
-                    userRepository.Update(user, new List<string>() { "PhoneNumberVerified" });
+                    await userRepository.Update(user, new List<string>() { "PhoneNumberVerified" });
 
                     return new VerifyMobileCodeResponseDTO()
                     {
@@ -194,7 +194,7 @@ namespace WebAPI.Services
 
         }
 
-        public SendEmailCodeResponseDTO SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequest)
+        public async Task<SendEmailCodeResponseDTO> SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequest)
         {
             try
             {
@@ -204,7 +204,7 @@ namespace WebAPI.Services
 
                 User user = sendEmailCodeRequest.User;
                 user.EmailCode = sixDigitNumber;
-                userRepository.Update(user, new List<string>() { "EmailCode" });
+                await userRepository.Update(user, new List<string>() { "EmailCode" });
 
                 Logger.Log("The email code for " + user.UserName + " is " + user.EmailCode);
                 return new SendEmailCodeResponseDTO()
@@ -224,11 +224,11 @@ namespace WebAPI.Services
             }
         }
 
-        public VerifyEmailCodeResponseDTO VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO)
+        public async Task<VerifyEmailCodeResponseDTO> VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO)
         {
             try
             {
-                User user = userRepository.Find(u => u.UserName == verifyEmailCodeRequestDTO.Username);
+                User user = await userRepository.Find(u => u.UserName == verifyEmailCodeRequestDTO.Username);
                 if (user == null || user.EmailCode == null)
                 {
                     return new VerifyEmailCodeResponseDTO()
@@ -242,7 +242,7 @@ namespace WebAPI.Services
                 if (user.EmailCode == verifyEmailCodeRequestDTO.EmailCode)
                 {
                     user.EmailVerified = "true";
-                    userRepository.Update(user, new List<string>() { "EmailVerified" });
+                    await userRepository.Update(user, new List<string>() { "EmailVerified" });
 
                     return new VerifyEmailCodeResponseDTO()
                     {

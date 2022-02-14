@@ -7,16 +7,16 @@ namespace WebAPI.Services
 {
     public interface IAuthenticationService
     {
-        LoginResponseDTO Login(LoginRequestDTO loginRequest);
+        Task<LoginResponseDTO> Login(LoginRequestDTO loginRequest);
 
-        SignUpResponseDTO SignUp(SignUpRequestDTO signUpRequest, bool isAdmin);
+        Task<SignUpResponseDTO> SignUp(SignUpRequestDTO signUpRequest, bool isAdmin);
 
-        VerifyMobileCodeResponseDTO VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO);
+        Task<VerifyMobileCodeResponseDTO> VerifyMobileCode(VerifyMobileCodeRequestDTO verifyMobileCodeRequestDTO);
 
-        SendMobileCodeResponseDTO SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO);
+        Task<SendMobileCodeResponseDTO> SendMobileCode(SendMobileCodeRequestDTO sendMobileCodeRequestDTO);
 
-        VerifyEmailCodeResponseDTO VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO);
+        Task<VerifyEmailCodeResponseDTO> VerifyEmailCode(VerifyEmailCodeRequestDTO verifyEmailCodeRequestDTO);
 
-        SendEmailCodeResponseDTO SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequestDTO);
+        Task<SendEmailCodeResponseDTO> SendEmailCode(SendEmailCodeRequestDTO sendEmailCodeRequestDTO);
     }
 }

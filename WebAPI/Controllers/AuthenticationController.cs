@@ -23,15 +23,17 @@ namespace WebAPI.Controllers
         [Route("[controller]/Login")]
         public async Task<ActionResult<LoginResponseDTO>> Login(LoginRequestDTO loginRequest)
         {
+
             try
             {
-                LoginResponseDTO res = authenticationService.Login(loginRequest);
+                LoginResponseDTO res = await authenticationService.Login(loginRequest);
                 return Ok(res);
             }
             catch (Exception ex)
             {
                 return BadRequest(new LoginResponseDTO() { Success = false, Message = "An error has occured" + ex });
             }
+
         }
 
         [HttpPost]
@@ -41,7 +43,7 @@ namespace WebAPI.Controllers
             try
             {
 
-                SignUpResponseDTO res = authenticationService.SignUp(signUpRequest,false);
+                SignUpResponseDTO res = await authenticationService.SignUp(signUpRequest, false);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -57,7 +59,7 @@ namespace WebAPI.Controllers
             try
             {
 
-                SignUpResponseDTO res = authenticationService.SignUp(signUpRequest,true);
+                SignUpResponseDTO res = await authenticationService.SignUp(signUpRequest, true);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -72,7 +74,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                SendMobileCodeResponseDTO res = authenticationService.SendMobileCode(sendMobileCodeRequest);
+                SendMobileCodeResponseDTO res = await authenticationService.SendMobileCode(sendMobileCodeRequest);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -87,11 +89,11 @@ namespace WebAPI.Controllers
         {
             try
             {
-                VerifyMobileCodeResponseDTO res = authenticationService.VerifyMobileCode(verifyMobileCodeRequest);
-               
+                VerifyMobileCodeResponseDTO res = await authenticationService.VerifyMobileCode(verifyMobileCodeRequest);
+
                 return Ok(res);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(new VerifyMobileCodeResponseDTO() { Success = false, Message = "An error has occured" + ex });
 
@@ -104,7 +106,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                SendEmailCodeResponseDTO res = authenticationService.SendEmailCode(sendEmaillCodeRequest);
+                SendEmailCodeResponseDTO res = await authenticationService.SendEmailCode(sendEmaillCodeRequest);
                 return Ok(res);
             }
             catch (Exception ex)
@@ -119,7 +121,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                VerifyEmailCodeResponseDTO res = authenticationService.VerifyEmailCode(verifyEmailCodeRequest);
+                VerifyEmailCodeResponseDTO res = await authenticationService.VerifyEmailCode(verifyEmailCodeRequest);
                 return Ok(res);
             }
             catch (Exception ex)

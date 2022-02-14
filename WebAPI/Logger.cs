@@ -35,9 +35,7 @@ namespace WebAPI
 
         public static void Log(string text, string pathh)
         { 
-        //{
-        //    if (Singleton.GetUser() != null)
-        //    { username = Singleton.GetUser().UserName + ": "; }
+        
             // This text is added only once to the file.
             
             if (!File.Exists(pathh))
